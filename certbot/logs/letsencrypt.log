@@ -1,0 +1,181 @@
+2020-10-21 04:24:15,995:DEBUG:certbot._internal.main:certbot version: 1.9.0
+2020-10-21 04:24:15,995:DEBUG:certbot._internal.main:Arguments: ['--webroot', '--webroot-path=/var/www/html', '--email', 'dani@satusoft.com', '--agree-tos', '--no-eff-email', '-d', 'ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com', '-d', 'www.ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com']
+2020-10-21 04:24:15,995:DEBUG:certbot._internal.main:Discovered plugins: PluginsRegistry(PluginEntryPoint#manual,PluginEntryPoint#null,PluginEntryPoint#standalone,PluginEntryPoint#webroot)
+2020-10-21 04:24:16,012:DEBUG:certbot._internal.log:Root logging level set at 20
+2020-10-21 04:24:16,012:INFO:certbot._internal.log:Saving debug log to /var/log/letsencrypt/letsencrypt.log
+2020-10-21 04:24:16,014:DEBUG:certbot._internal.plugins.selection:Requested authenticator webroot and installer None
+2020-10-21 04:24:16,017:DEBUG:certbot._internal.plugins.selection:Single candidate plugin: * webroot
+Description: Place files in webroot directory
+Interfaces: IAuthenticator, IPlugin
+Entry point: webroot = certbot._internal.plugins.webroot:Authenticator
+Initialized: <certbot._internal.plugins.webroot.Authenticator object at 0x7f5bce402cd0>
+Prep: True
+2020-10-21 04:24:16,018:DEBUG:certbot._internal.plugins.selection:Selected authenticator <certbot._internal.plugins.webroot.Authenticator object at 0x7f5bce402cd0> and installer None
+2020-10-21 04:24:16,018:INFO:certbot._internal.plugins.selection:Plugins selected: Authenticator webroot, Installer None
+2020-10-21 04:24:16,106:DEBUG:acme.client:Sending GET request to https://acme-v02.api.letsencrypt.org/directory.
+2020-10-21 04:24:16,109:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): acme-v02.api.letsencrypt.org:443
+2020-10-21 04:24:16,903:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "GET /directory HTTP/1.1" 200 658
+2020-10-21 04:24:16,904:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Wed, 21 Oct 2020 04:24:16 GMT
+Content-Type: application/json
+Content-Length: 658
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "D2wHmFN3kng": "https://community.letsencrypt.org/t/adding-random-entries-to-the-directory/33417",
+  "keyChange": "https://acme-v02.api.letsencrypt.org/acme/key-change",
+  "meta": {
+    "caaIdentities": [
+      "letsencrypt.org"
+    ],
+    "termsOfService": "https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf",
+    "website": "https://letsencrypt.org"
+  },
+  "newAccount": "https://acme-v02.api.letsencrypt.org/acme/new-acct",
+  "newNonce": "https://acme-v02.api.letsencrypt.org/acme/new-nonce",
+  "newOrder": "https://acme-v02.api.letsencrypt.org/acme/new-order",
+  "revokeCert": "https://acme-v02.api.letsencrypt.org/acme/revoke-cert"
+}
+2020-10-21 04:24:16,904:DEBUG:acme.client:Requesting fresh nonce
+2020-10-21 04:24:16,905:DEBUG:acme.client:Sending HEAD request to https://acme-v02.api.letsencrypt.org/acme/new-nonce.
+2020-10-21 04:24:17,099:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "HEAD /acme/new-nonce HTTP/1.1" 200 0
+2020-10-21 04:24:17,099:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Wed, 21 Oct 2020 04:24:17 GMT
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0004nfsS6eM4fQ2cmm6AW0-7E4F3OpibYsNTjIAvneTsJkI
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+
+2020-10-21 04:24:17,100:DEBUG:acme.client:Storing nonce: 0004nfsS6eM4fQ2cmm6AW0-7E4F3OpibYsNTjIAvneTsJkI
+2020-10-21 04:24:17,100:DEBUG:acme.client:JWS payload:
+b'{\n  "contact": [\n    "mailto:dani@satusoft.com"\n  ],\n  "termsOfServiceAgreed": true\n}'
+2020-10-21 04:24:17,103:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/new-acct:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAiandrIjogeyJuIjogIjEzRDhKcFpBcUlvajFHZHMwUEhqbkNWSzZZbDJYWU54OUszZ2NpYlB0LVZzbEUxSGY2X1BONUlodzl5WHJONVRxMTM2ZUEzRXA2YnI4dmVxX1RHdW9hWDh6dHhOQVNNSHFuRzc2TjdkSGlPMmQ1V3huOUE2amQ2RnN0MWl0T296TGduOHdzSDRRdWVreVVlcG1aUHJmLU0zYzc1RnNvdy1zekh3elBzbkIyWUlRbldIUjd5TXVLMnVBd0Z3ZVo4SVJGS2RKWmZaX291NFF3RXpGMFJQWjF3NEJST3c0SGttZ2xhVTZvOExNM2VaV0VJc2lQaTNEODU0dHZ2VFJ3SnIwV2Z2bGtWZkZjd2lCSG9nVnpkRE1WU1FNcTNzREJ4U05fOEs2WUtyTmJ5N2c2NVlQX3ZDd0pUdDQ5TzRnbk14aExmSTRpblNLUHhjLWhIbTA4LS1HUSIsICJlIjogIkFRQUIiLCAia3R5IjogIlJTQSJ9LCAibm9uY2UiOiAiMDAwNG5mc1M2ZU00ZlEyY21tNkFXMC03RTRGM09waWJZc05UaklBdm5lVHNKa0kiLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL25ldy1hY2N0In0",
+  "signature": "vLHI1h2pu8Ta9eL8SUs16kUPszpykaYuQO81jYvKVXYWccE4hmuJM4_TljwPS8cFgxSf7OcoQUsd72ZUsRoUGngFGjQ_Zm7AW4ZDeSR8sYiRVGkWl19jva_wnUal7IG0r9sSWmOwg4xUgoDUL7smp8ars0DCHlOnHCGKZEeN-e7E2LvDfVc_1hHQ8DgkSXmqiAY0l9UtWGJysBg_aoUWSN6vVqHEcMKdyRDgclBK4EwPN_VATiRrwr_Z7feEH_YEgJOu0QGB_lli8CDWCafjEl3RXoKqKrDjIXeFTzit9L5X9Y3TkbciPNFrzyrTVZ_DTwQs3Cb6xApYgHkRpg__rQ",
+  "payload": "ewogICJjb250YWN0IjogWwogICAgIm1haWx0bzpkYW5pQHNhdHVzb2Z0LmNvbSIKICBdLAogICJ0ZXJtc09mU2VydmljZUFncmVlZCI6IHRydWUKfQ"
+}
+2020-10-21 04:24:17,313:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/new-acct HTTP/1.1" 201 560
+2020-10-21 04:24:17,314:DEBUG:acme.client:Received response:
+HTTP 201
+Server: nginx
+Date: Wed, 21 Oct 2020 04:24:17 GMT
+Content-Type: application/json
+Content-Length: 560
+Connection: keep-alive
+Boulder-Requester: 99892797
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index", <https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf>;rel="terms-of-service"
+Location: https://acme-v02.api.letsencrypt.org/acme/acct/99892797
+Replay-Nonce: 000326fo1jXRBbgZCRvcVjOwde_LdLcJVrj-geZIuOoT5jM
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "key": {
+    "kty": "RSA",
+    "n": "13D8JpZAqIoj1Gds0PHjnCVK6Yl2XYNx9K3gcibPt-VslE1Hf6_PN5Ihw9yXrN5Tq136eA3Ep6br8veq_TGuoaX8ztxNASMHqnG76N7dHiO2d5Wxn9A6jd6Fst1itOozLgn8wsH4QuekyUepmZPrf-M3c75Fsow-szHwzPsnB2YIQnWHR7yMuK2uAwFweZ8IRFKdJZfZ_ou4QwEzF0RPZ1w4BROw4HkmglaU6o8LM3eZWEIsiPi3D854tvvTRwJr0WfvlkVfFcwiBHogVzdDMVSQMq3sDBxSN_8K6YKrNby7g65YP_vCwJTt49O4gnMxhLfI4inSKPxc-hHm08--GQ",
+    "e": "AQAB"
+  },
+  "contact": [
+    "mailto:dani@satusoft.com"
+  ],
+  "initialIp": "18.141.235.55",
+  "createdAt": "2020-10-21T04:24:17.215262012Z",
+  "status": "valid"
+}
+2020-10-21 04:24:17,314:DEBUG:acme.client:Storing nonce: 000326fo1jXRBbgZCRvcVjOwde_LdLcJVrj-geZIuOoT5jM
+2020-10-21 04:24:17,316:DEBUG:certbot._internal.reporter:Reporting to user: Your account credentials have been saved in your Certbot configuration directory at /etc/letsencrypt. You should make a secure backup of this folder now. This configuration directory will also contain certificates and private keys obtained by Certbot so making regular backups of this folder is ideal.
+2020-10-21 04:24:17,318:DEBUG:certbot._internal.main:Picked account: <Account(RegistrationResource(body=Registration(key=JWKRSA(key=<ComparableRSAKey(<cryptography.hazmat.backends.openssl.rsa._RSAPublicKey object at 0x7f5bce3fab50>)>), contact=('mailto:dani@satusoft.com',), agreement=None, status='valid', terms_of_service_agreed=None, only_return_existing=None, external_account_binding=None), uri='https://acme-v02.api.letsencrypt.org/acme/acct/99892797', new_authzr_uri=None, terms_of_service='https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf'), b873069cbfcbbaefaf05606dae10148c, Meta(creation_dt=datetime.datetime(2020, 10, 21, 4, 24, 17, tzinfo=<UTC>), creation_host='8d754bfcbffb', register_to_eff=None))>
+2020-10-21 04:24:17,319:INFO:certbot._internal.main:Obtaining a new certificate
+2020-10-21 04:24:17,419:DEBUG:certbot.crypto_util:Generating key (2048 bits): /etc/letsencrypt/keys/0000_key-certbot.pem
+2020-10-21 04:24:17,421:DEBUG:certbot.crypto_util:Creating CSR: /etc/letsencrypt/csr/0000_csr-certbot.pem
+2020-10-21 04:24:17,429:DEBUG:acme.client:JWS payload:
+b'{\n  "identifiers": [\n    {\n      "type": "dns",\n      "value": "ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com"\n    },\n    {\n      "type": "dns",\n      "value": "www.ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com"\n    }\n  ]\n}'
+2020-10-21 04:24:17,431:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/new-order:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvOTk4OTI3OTciLCAibm9uY2UiOiAiMDAwMzI2Zm8xalhSQmJnWkNSdmNWak93ZGVfTGRMY0pWcmotZ2VaSXVPb1Q1ak0iLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL25ldy1vcmRlciJ9",
+  "signature": "VSom1B9v6G_x4k_BNixFhTKtzIF-eJrNy8DxXulkfnO9JBXGgnEM8yNm2MNMPmSXldlEuWzVwTg4DTOlafQ6Sax4fVsAT35ZziwLbT601pfeFnHezXobIr13TAGAbMu4hxAmi9hcLv1prgZGKGoclA56XguBHAet2EwHVgi7bFnLCwMhq5wL9obba5Ijo6w3rAU77vJiQRpX3o7YXy2P8OQy12szJ8MQyn9kWVxMybllUKNZMraa1LmArNPsmNPCp9mJlaDfLy5A3HCNw3-1owEii2oZagC97YbOM_qquCD4Cu4pcf0I4jk7VD64VhLrks1tAlyKRTNogDG-C5RVUw",
+  "payload": "ewogICJpZGVudGlmaWVycyI6IFsKICAgIHsKICAgICAgInR5cGUiOiAiZG5zIiwKICAgICAgInZhbHVlIjogImVjMi0xOC0xNDEtMjM1LTU1LmFwLXNvdXRoZWFzdC0xLmNvbXB1dGUuYW1hem9uYXdzLmNvbSIKICAgIH0sCiAgICB7CiAgICAgICJ0eXBlIjogImRucyIsCiAgICAgICJ2YWx1ZSI6ICJ3d3cuZWMyLTE4LTE0MS0yMzUtNTUuYXAtc291dGhlYXN0LTEuY29tcHV0ZS5hbWF6b25hd3MuY29tIgogICAgfQogIF0KfQ"
+}
+2020-10-21 04:24:17,630:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/new-order HTTP/1.1" 400 1143
+2020-10-21 04:24:17,631:DEBUG:acme.client:Received response:
+HTTP 400
+Server: nginx
+Date: Wed, 21 Oct 2020 04:24:17 GMT
+Content-Type: application/problem+json
+Content-Length: 1143
+Connection: keep-alive
+Boulder-Requester: 99892797
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0004ul4m3OiwcAaKVXEm9viv7ABnhaqQaVpcT8whIZrv4qs
+
+{
+  "type": "urn:ietf:params:acme:error:rejectedIdentifier",
+  "detail": "Error creating new order :: Cannot issue for \"ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com\": The ACME server refuses to issue a certificate for this domain name, because it is forbidden by policy (and 1 more problems. Refer to sub-problems for more information.)",
+  "status": 400,
+  "subproblems": [
+    {
+      "type": "urn:ietf:params:acme:error:rejectedIdentifier",
+      "detail": "Error creating new order :: The ACME server refuses to issue a certificate for this domain name, because it is forbidden by policy",
+      "status": 400,
+      "identifier": {
+        "type": "dns",
+        "value": "ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com"
+      }
+    },
+    {
+      "type": "urn:ietf:params:acme:error:rejectedIdentifier",
+      "detail": "Error creating new order :: The ACME server refuses to issue a certificate for this domain name, because it is forbidden by policy",
+      "status": 400,
+      "identifier": {
+        "type": "dns",
+        "value": "www.ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com"
+      }
+    }
+  ]
+}
+2020-10-21 04:24:17,631:DEBUG:certbot._internal.log:Exiting abnormally:
+Traceback (most recent call last):
+  File "/usr/local/bin/certbot", line 11, in <module>
+    load_entry_point('certbot', 'console_scripts', 'certbot')()
+  File "/opt/certbot/src/certbot/certbot/main.py", line 15, in main
+    return internal_main.main(cli_args)
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 1362, in main
+    return config.func(config, plugins)
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 1243, in certonly
+    lineage = _get_and_save_cert(le_client, config, domains, certname, lineage)
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 122, in _get_and_save_cert
+    lineage = le_client.obtain_and_enroll_certificate(domains, certname)
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 418, in obtain_and_enroll_certificate
+    cert, chain, key, _ = self.obtain_certificate(domains)
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 351, in obtain_certificate
+    orderr = self._get_order_and_authorizations(csr.data, self.config.allow_subset_of_names)
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 383, in _get_order_and_authorizations
+    orderr = self.acme.new_order(csr_pem)
+  File "/opt/certbot/src/acme/acme/client.py", line 886, in new_order
+    return self.client.new_order(csr_pem)
+  File "/opt/certbot/src/acme/acme/client.py", line 668, in new_order
+    response = self._post(self.directory['newOrder'], order)
+  File "/opt/certbot/src/acme/acme/client.py", line 97, in _post
+    return self.net.post(*args, **kwargs)
+  File "/opt/certbot/src/acme/acme/client.py", line 1201, in post
+    return self._post_once(*args, **kwargs)
+  File "/opt/certbot/src/acme/acme/client.py", line 1214, in _post_once
+    response = self._check_response(response, content_type=content_type)
+  File "/opt/certbot/src/acme/acme/client.py", line 1072, in _check_response
+    raise messages.Error.from_json(jobj)
+acme.messages.Error: urn:ietf:params:acme:error:rejectedIdentifier :: The server will not issue certificates for the identifier :: Error creating new order :: Cannot issue for "ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com": The ACME server refuses to issue a certificate for this domain name, because it is forbidden by policy (and 1 more problems. Refer to sub-problems for more information.)
+2020-10-21 04:24:17,633:ERROR:certbot._internal.log:An unexpected error occurred:
+2020-10-21 04:24:17,633:ERROR:certbot._internal.log:The server will not issue certificates for the identifier :: Error creating new order :: Cannot issue for "ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com": The ACME server refuses to issue a certificate for this domain name, because it is forbidden by policy (and 1 more problems. Refer to sub-problems for more information.)

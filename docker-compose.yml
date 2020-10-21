@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+  odoo:
+    image: odoo:13.0
+    container_name: odoo13
+    depends_on:
+      - db
+    ports:
+      - "8787:8787"
+    volumes:
+      - odoo13-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+#  nginx:
+#    container_name: nginx
+#    image: nginx:latest
+#    restart: unless-stopped
+#    ports:
+#      - 80:80
+#      - 443:443
+#    volumes:
+#      - ./nginx/config:/etc/nginx/conf.d
+#      - ./certbot/conf:/etc/nginx/ssl
+#      - ./certbot/data:/var/www/html
+#  certbot:
+#    container_name: certbot
+#    image: certbot/certbot:latest
+#    command: certonly --webroot --webroot-path=/var/www/html --email dani@satusoft.com --agree-tos --no-eff-email -d ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com -d www.ec2-18-141-235-55.ap-southeast-1.compute.amazonaws.com
+#    volumes:
+#      - ./certbot/conf:/etc/letsencrypt
+#      - ./certbot/logs:/var/log/letsencrypt
+#      - ./certbot/data:/var/www/html
+  db:
+    image: postgres:10
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - odoo13-db-data:/var/lib/postgresql/data/pgdata
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy:ro
+volumes:
+  odoo13-web-data:
+  odoo13-db-data:
+networks:
+  default:
+    external:
+      name: odoo13-network
