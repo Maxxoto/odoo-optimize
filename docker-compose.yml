@@ -7,19 +7,20 @@ services:
       - db
     ports:
       - "8787:8787"
+      - "8072:8072"
     volumes:
       - odoo13-web-data:/var/lib/odoo
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
-#  nginx:
-#    container_name: nginx
-#    image: nginx:latest
-#    restart: unless-stopped
-#    ports:
-#      - 80:80
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - 80:80
 #      - 443:443
-#    volumes:
-#      - ./nginx/config:/etc/nginx/conf.d
+    volumes:
+      - ./nginx/config:/etc/nginx/conf.d
 #      - ./certbot/conf:/etc/nginx/ssl
 #      - ./certbot/data:/var/www/html
 #  certbot:
@@ -42,13 +43,13 @@ services:
       - "5432:5432"
     volumes:
       - odoo13-db-data:/var/lib/postgresql/data/pgdata
-  haproxy:
-    image: haproxy:latest
-    container_name: haproxy
-    ports:
-      - "80:80"
-    volumes:
-      - ./haproxy:/usr/local/etc/haproxy:ro
+#  haproxy:
+#    image: haproxy:latest
+#    container_name: haproxy
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./haproxy:/usr/local/etc/haproxy:ro
 volumes:
   odoo13-web-data:
   odoo13-db-data:
