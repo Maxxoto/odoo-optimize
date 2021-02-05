@@ -11,7 +11,8 @@ services:
     volumes:
       - odoo13-web-data:/var/lib/odoo
       - ./config:/etc/odoo
-      - ./addons:/mnt/extra-addons
+      - ./addons:/mnt/extra-addons  
+    command: --dev=all
   nginx:
     container_name: nginx
     image: nginx:latest
